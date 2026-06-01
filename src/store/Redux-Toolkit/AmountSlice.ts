@@ -1,12 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
+interface BankAccountSliceType {
+  amount: number;
+}
+
+const initialState: BankAccountSliceType = {
+  amount: 0,
+};
 
 export const bankAmountSlice = createSlice({
   name: "bank",
-  initialState: {
-    amount: 0,
-  },
+  initialState,
   reducers: {
-    deposit: (state, action) => {
+    deposit: (state, action: PayloadAction<BankAccountSliceType>) => {
       state.amount += action.payload.amount;
     },
 
