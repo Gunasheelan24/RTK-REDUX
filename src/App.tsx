@@ -1,12 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "./hooks/Redux-Hooks";
+import { deposit } from "./store/Redux-Toolkit/AmountSlice";
 
 const App: React.FC = () => {
-  const state = useSelector((state) => state);
-  console.log(state);
+  const state = useAppSelector((state) => state.bankAmount.amount);
+  const dispatch = useAppDispatch();
+
   return (
     <>
-      <p>{"welcome"}</p>
+      <p>{state}</p>
+      <button onClick={() => dispatch(deposit({ amount: 100 }))}>
+        Increase Amount
+      </button>
     </>
   );
 };
