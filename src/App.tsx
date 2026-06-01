@@ -6,7 +6,7 @@ const App: React.FC = () => {
   console.log(state);
   return (
     <>
-      <p>{state.amount}</p>
+      <p>{"welcome"}</p>
     </>
   );
 };
