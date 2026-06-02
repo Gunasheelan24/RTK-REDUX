@@ -9,11 +9,21 @@ const App: React.FC = () => {
   const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
+  // functions
+  async function getUserDetails() {
+    try {
+      const result = await dispatch(fetchUser(2)).unwrap();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // lifecycle Hook
   useEffect(() => {
     // fetch userDetail
-    dispatch(fetchUser(2));
-  }, [dispatch]);
+    getUserDetails();
+  }, []);
 
   return (
     <>
