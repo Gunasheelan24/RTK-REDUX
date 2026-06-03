@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useGetUserQuery } from "./store/Redux-Toolkit/api/userApi";
+import { useCreateUserMutation, useGetUserQuery } from "./store/Redux-Toolkit/api/userApi";
 // import { useAppDispatch, useAppSelector } from "./hooks/Redux-Hooks";
 // import { deposit } from "./store/Redux-Toolkit/Bank/AmountSlice";
 // import { fetchUser } from "./store/Redux-Toolkit/User/userSlice";
@@ -11,7 +11,8 @@ const App: React.FC = () => {
   // const dispatch = useAppDispatch();
 
   // RTK Query
-  const { data } = useGetUserQuery(1);
+  const { refetch } = useGetUserQuery(1);
+  const [createUser, { isLoading, data }] = useCreateUserMutation();
 
   // functions
   // async function getUserDetails() {
@@ -45,6 +46,10 @@ const App: React.FC = () => {
       {/* <div>
         <button onClick={() => handleUserSubmit()}>Add New User</button>
       </div> */}
+
+      {/* Mutation */}
+      <p>{isLoading ? "Loading Bruh" : "Not Loading Bruh"}</p>
+      <button onClick={() => createUser(1)}>Add User</button>
     </>
   );
 };
