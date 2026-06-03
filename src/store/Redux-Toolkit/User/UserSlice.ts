@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, type PayloadAction,} from "@reduxjs/toolkit";
 import type { User, UserTypes } from "./user.types";
-
 
 const initialState: UserTypes = {
   error: "",
@@ -16,12 +15,29 @@ const initialState: UserTypes = {
 };
 
 // Thunk
-export const fetchUser = createAsyncThunk("users", async (userId: number) => {
-  const getResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`,
-    { method: "GET" },
-  );
-  return await getResponse.json();
-});
+export const fetchUser = createAsyncThunk(
+  "users",
+  async (userId: number, { rejectWithValue, getState, }) => {
+    try {
+      const getResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`,
+        { method: "GET" },
+      );
+      const getResult = await getResponse.json();
+
+      // get State Value
+      const stateValue = getState();
+      console.log(stateValue)
+
+      if (!getResponse?.ok) return rejectWithValue("No Data Found");
+      return getResult;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(`${error.message}-${error.stack}`);
+      }
+      return rejectWithValue(`something went wrong`);
+    }
+  },
+);
 
 // slice
 const userSlice = createSlice({
@@ -59,8 +75,8 @@ const userSlice = createSlice({
         return state;
       })
       .addCase(fetchUser.rejected, (state, action) => {
-        console.log(action.error, action.payload);
         state.loading = false;
+        state.error = typeof action?.payload == "string" ? action.payload : "Something Went Wrong";
       });
   },
 });
