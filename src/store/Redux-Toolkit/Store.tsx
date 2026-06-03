@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import amountReducer from "./Bank/AmountSlice";
-import counterReducer from "./Bank/CounterSlice";
-import userReducer from "./User/userSlice";
+import counterReducer from "./Bank/counterSlice";
+import userReducer from "./User/UserSlice";
 import userApi from "./api/userApi";
 
 export const rtkStore = configureStore({

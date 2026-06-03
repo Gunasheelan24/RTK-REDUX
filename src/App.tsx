@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {
   useCreateUserMutation,
-  // useGetUserQuery,
+  useGetUserQuery,
 } from "./store/Redux-Toolkit/api/userApi";
 // import { useAppDispatch, useAppSelector } from "./hooks/Redux-Hooks";
 // import { deposit } from "./store/Redux-Toolkit/Bank/AmountSlice";
@@ -14,7 +14,10 @@ const App: React.FC = () => {
   // const dispatch = useAppDispatch();
 
   // RTK Query
-  // const { refetch } = useGetUserQuery(1);
+  const dataValue = useGetUserQuery(1, {
+    refetchOnReconnect: true,
+    pollingInterval: 5000,
+  });
   const [createUser, { isLoading, data }] = useCreateUserMutation();
 
   // functions
@@ -29,7 +32,7 @@ const App: React.FC = () => {
 
   // lifecycle Hook
   useEffect(() => {
-    console.log(data);
+    console.log(dataValue);
     // fetch userDetail
     // getUserDetails();
   }, [data]);
