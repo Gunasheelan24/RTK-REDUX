@@ -7,10 +7,10 @@ redux -- we don't need to install the package in main project because for learni
 
 devDependency:
 @types/react-redux -- react redux offical have type defination for the react-redux library
-
+ 
 <!-- RoadMap
 1)createApi
-2)reducerPath
+2)reducerPath 
 3)fetchBaseQuery
 4)builder.query
 5)builder.mutation
