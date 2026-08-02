@@ -6,7 +6,9 @@ react-redux -- this package is a bridge connecting the react app and redux store
 redux -- we don't need to install the package in main project because for learning i have installed it 
 
 devDependency:
-@types/react-redux -- react redux offical have type defination for the react-redux library
+
+
+@types/react-redux -- react redux offical have type defination for the  react-redux library
  
 <!-- RoadMap
 1)createApi
